@@ -1,6 +1,8 @@
 package ru.gb.MyMarket.market.services;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.gb.MyMarket.market.models.Product;
 import ru.gb.MyMarket.market.repositories.ProductRepository;
@@ -13,8 +15,8 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll(int pageIndex, int pageSize) {
+        return productRepository.findAll(PageRequest.of(pageIndex, pageSize));
     }
 
     public Optional<Product> findById(Long id) {
@@ -39,5 +41,9 @@ public class ProductService {
 
     public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    public long count(){
+        return productRepository.count();
     }
 }
