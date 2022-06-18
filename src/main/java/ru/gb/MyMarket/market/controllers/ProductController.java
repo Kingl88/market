@@ -2,51 +2,67 @@ package ru.gb.MyMarket.market.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.MyMarket.market.dto.ProductDto;
+import ru.gb.MyMarket.market.exceptions.ResourceNotFoundException;
+import ru.gb.MyMarket.market.models.Category;
 import ru.gb.MyMarket.market.models.Product;
+import ru.gb.MyMarket.market.services.CategoryService;
 import ru.gb.MyMarket.market.services.ProductService;
 
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/products")
 public class ProductController {
     private final ProductService productService;
+    private final CategoryService categoryService;
 
 
-        @GetMapping("/products")
-    public Page<ProductDto> findAll(@RequestParam (name = "page", defaultValue = "1") int pageIndex) {
-            if(pageIndex < 1){
-                pageIndex = 1;
-            }
+    @GetMapping("/")
+    public Page<ProductDto> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex) {
+        if (pageIndex < 1) {
+            pageIndex = 1;
+        }
         return productService.findAll(pageIndex - 1, 10).map(ProductDto::new);
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/{id}")
     public ProductDto findById(@PathVariable Long id) {
-        return new ProductDto(productService.findById(id).get());
+        return new ProductDto(productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product id = " + id + " not found")));
     }
 
-    @GetMapping("/products/price")
-    public List<Product> findByPrice(@RequestParam(name = "min", required = false) Integer minPrice, @RequestParam(name = "max", required = false) Integer maxPrice) {
-        if (minPrice == null) {
-            return productService.findByPriceBefore(maxPrice);
-        }
-        if (maxPrice == null) {
-            return productService.findByPriceAfter(minPrice);
-        } else {
-            return productService.findByPriceBetween(minPrice, maxPrice);
-        }
+
+    @PostMapping("/")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProductDto save(@RequestBody ProductDto productDto) {
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        Category category = categoryService.findByTitle(productDto.getCategoryTitle()).orElseThrow(() -> new ResourceNotFoundException("Category title = " + productDto.getCategoryTitle() + " not found"));
+        product.setCategory(category);
+        productService.save(product);
+        return new ProductDto(product);
     }
 
-    @PostMapping("/products")
-    public Product save(@RequestBody Product product) {
-        return productService.save(product);
+    @PutMapping("/")
+    @ResponseStatus(HttpStatus.OK)
+    public ProductDto update(@RequestBody ProductDto productDto) {
+        Product product = new Product();
+        product.setId(productDto.getId());
+        product.setTitle(productDto.getTitle());
+        product.setPrice(productDto.getPrice());
+        Category category = categoryService.findByTitle(productDto.getCategoryTitle()).orElseThrow(() -> new ResourceNotFoundException("Category title = " + productDto.getCategoryTitle() + " not found"));
+        product.setCategory(category);
+        productService.save(product);
+        return new ProductDto(product);
     }
 
-    @GetMapping("/products/delete/{id}")
-    public void deleteById(@PathVariable Long id, @RequestParam (name = "page", defaultValue = "1") int pageIndex) {
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);
     }
 }

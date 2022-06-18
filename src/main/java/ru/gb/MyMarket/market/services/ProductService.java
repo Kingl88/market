@@ -43,7 +43,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public long count(){
+    public long count() {
         return productRepository.count();
     }
 }

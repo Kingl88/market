@@ -12,12 +12,13 @@
  **/
 
 angular.module('market-frontApp', []).controller('appController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/market/';
+    const contextPath = 'http://localhost:8189/market/api/v1';
     let pageDefault = 1;
 
     $scope.loadProducts = function (pageIndex = 1) {
+        pageDefault = pageIndex;
         $http({
-            url: contextPath + 'products',
+            url: contextPath + '/products/',
             method: 'GET',
             params: {
                 page: pageIndex
@@ -25,12 +26,53 @@ angular.module('market-frontApp', []).controller('appController', function ($sco
         }).then(function (response) {
             console.log(response);
             $scope.productsPage = response.data;
+            $scope.paginationArray = $scope.generatePageIndexes(1, $scope.productsPage.totalPages);
+            if (response.data.first) {
+                document.getElementById("previewButton").setAttribute("disabled", "true");
+                document.getElementById("previewButton").setAttribute("style", "color: grey");
+                document.getElementById("nextButton").removeAttribute("disabled");
+                document.getElementById("nextButton").setAttribute("style", "color: #0d6efd");
+            } else if (response.data.last) {
+                document.getElementById("nextButton").setAttribute("disabled", "true");
+                document.getElementById("nextButton").setAttribute("style", "color: grey");
+                document.getElementById("previewButton").setAttribute("style", "color: #0d6efd");
+                document.getElementById("previewButton").removeAttribute("disabled");
+            } else {
+                document.getElementById("nextButton").removeAttribute("disabled");
+                document.getElementById("nextButton").setAttribute("style", "color: #0d6efd");
+                document.getElementById("previewButton").removeAttribute("disabled");
+                document.getElementById("previewButton").setAttribute("style", "color: #0d6efd");
+            }
+            console.log(document.getElementById("previewButton"));
         });
     }
-
+    $scope.loadCategories = function () {
+        $http.get(contextPath + '/categories/').then(function (response) {
+            console.log(response);
+            $scope.categories = response;
+        })
+    }
+    $scope.createNewProduct = function () {
+        console.log($scope.new_product);
+        $http.post(contextPath + '/products/', $scope.new_product)
+            .then(function successCallback(response) {
+                $scope.loadProducts(pageDefault);
+                $scope.new_product = null;
+            }, function failCallback(response) {
+                alert(response.data.message);
+            });
+    }
     $scope.nextPage = function () {
         pageDefault++;
         $scope.loadProducts(pageDefault);
+    }
+
+    $scope.generatePageIndexes = function (startPage, endPage) {
+        let arr = [];
+        for (let i = startPage; i <= endPage; i++) {
+            arr.push(i);
+        }
+        return arr;
     }
 
     $scope.previewPage = function () {
@@ -39,12 +81,13 @@ angular.module('market-frontApp', []).controller('appController', function ($sco
     }
 
     $scope.deleteProduct = function (product) {
-        $http.get(contextPath + 'products/delete/' + product.id).then(function (response) {
+        $http.delete(contextPath + '/products/' + product.id).then(function (response) {
             console.log(response);
             $scope.products = response.data;
             $scope.loadProducts(pageDefault);
         });
     }
     $scope.loadProducts(pageDefault);
+    $scope.loadCategories();
 
 });

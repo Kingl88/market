@@ -37,11 +37,39 @@
         </tr>
         </tbody>
     </table>
-    <div style="display: inline-block">
-        <button ng-show="!productsPage.first" type="button" class="btn btn-primary" ng-click="previewPage()">Preview
-        </button>
-        <button ng-show="!productsPage.last" type="button" class="btn btn-primary" ng-click="nextPage()">Next</button>
-    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <button id="previewButton" type="button" class="page-link" ng-click="previewPage()">Preview</button>
+            </li>
+            <li class="page-item" ng_repeat="pageIndex in paginationArray">
+                <button class="page-link" ng-click="loadProducts(pageIndex)">{{pageIndex}}</button>
+            </li>
+            <li class="page-item">
+                <button id="nextButton" type="button" class="page-link" ng-click="nextPage()">Next</button>
+            </li>
+        </ul>
+    </nav>
+    <p></p>
+    <h3>Add product</h3>
+    <form novalidate ng-submit="createNewProduct()">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" placeholder="Title" ng-model="new_product.title">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="text" class="form-control" placeholder="Price" ng-model="new_product.price">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category Title</label>
+            <select class="form-select" ng-model="new_product.categoryTitle">
+                <option ng-repeat="category in categories.data">{{category.title}}</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 </body>
 </html>
