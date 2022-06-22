@@ -11,65 +11,41 @@
             crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="index.js"></script>
 </head>
-<body ng-app="market-frontApp">
-<div class="container" ng-controller="appController">
-    <h2>Главная страница</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Price</td>
-            <td>Category</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="product in productsPage.content">
-            <td>{{product.id}}</td>
-            <td>{{product.title}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.categoryTitle}}</td>
-            <td>
-                <button type="button" class="btn btn-primary" ng-click="deleteProduct(product)">Delete</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <button id="previewButton" type="button" class="page-link" ng-click="previewPage()">Preview</button>
-            </li>
-            <li class="page-item" ng_repeat="pageIndex in paginationArray">
-                <button class="page-link" ng-click="loadProducts(pageIndex)">{{pageIndex}}</button>
-            </li>
-            <li class="page-item">
-                <button id="nextButton" type="button" class="page-link" ng-click="nextPage()">Next</button>
-            </li>
-        </ul>
+<body ng-app="market-front">
+<div class="container" ng-controller="indexController">
+    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#!/">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/store">Product catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/createProduct">Create product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/cart">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    <p></p>
-    <h3>Add product</h3>
-    <form novalidate ng-submit="createNewProduct()">
-        <div class="mb-3">
-            <label class="form-label">Title</label>
-            <input type="text" class="form-control" placeholder="Title" ng-model="new_product.title">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input type="text" class="form-control" placeholder="Price" ng-model="new_product.price">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Category Title</label>
-            <select class="form-select" ng-model="new_product.categoryTitle">
-                <option ng-repeat="category in categories.data">{{category.title}}</option>
-            </select>
-        </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+    <ng-view></ng-view>
+
+    <script src="index.js"></script>
+    <script src="store/store.js"></script>
+    <script src="welcome/welcome.js"></script>
+    <script src="updateProduct/updateProduct.js"></script>
+    <script src="createProduct/createProduct.js"></script>
+    <script src="cart/cart.js"></script>
 </div>
 </body>
 </html>

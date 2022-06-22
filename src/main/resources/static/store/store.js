@@ -1,17 +1,4 @@
-/** Описание создаваемого модуля, принимает 3 параметра:
- 1. Название модуля (market-frontApp)
- 2. Набор других модулей в вите строкового массива. от которых данный модуль зависит
- 3. Конфигурационные настройки модуля (необязательный параметр)
-
- controller(name, constructor): создает контроллер
- - appController - имя контроллера
- - function ($scope, $http), где
- - $scope - сервис через который контроллер передает данные в предстваление
- - $http - сервис для взаимодействия с удаленным HTTP-сервром через JSON
-
- **/
-
-angular.module('market-frontApp', []).controller('appController', function ($scope, $http) {
+angular.module('market-front').controller('storeController', function ($scope, $http, $location) {
     const contextPath = 'http://localhost:8189/market/api/v1';
     let pageDefault = 1;
 
@@ -46,22 +33,7 @@ angular.module('market-frontApp', []).controller('appController', function ($sco
             console.log(document.getElementById("previewButton"));
         });
     }
-    $scope.loadCategories = function () {
-        $http.get(contextPath + '/categories/').then(function (response) {
-            console.log(response);
-            $scope.categories = response;
-        })
-    }
-    $scope.createNewProduct = function () {
-        console.log($scope.new_product);
-        $http.post(contextPath + '/products/', $scope.new_product)
-            .then(function successCallback(response) {
-                $scope.loadProducts(pageDefault);
-                $scope.new_product = null;
-            }, function failCallback(response) {
-                alert(response.data.message);
-            });
-    }
+
     $scope.nextPage = function () {
         pageDefault++;
         $scope.loadProducts(pageDefault);
@@ -87,7 +59,17 @@ angular.module('market-frontApp', []).controller('appController', function ($sco
             $scope.loadProducts(pageDefault);
         });
     }
+
+    $scope.navToEditProductPage = function (productId) {
+        $location.path('/updateProduct/' + productId);
+    }
+    $scope.addToCart = function (product) {
+        $http.post(contextPath + '/products/addToCart/' + product.id).then(function (response) {
+            console.log(response);
+            $scope.loadProducts(pageDefault);
+        })
+    }
+
     $scope.loadProducts(pageDefault);
-    $scope.loadCategories();
 
 });
