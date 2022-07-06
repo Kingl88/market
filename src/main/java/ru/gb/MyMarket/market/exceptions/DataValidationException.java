@@ -12,4 +12,7 @@ public class DataValidationException extends RuntimeException {
     public DataValidationException(List<String> messages) {
         this.messages = messages;
     }
+    public DataValidationException(String message) {
+        this(List.of(message));
+    }
 }
