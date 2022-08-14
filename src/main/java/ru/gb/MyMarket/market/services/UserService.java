@@ -1,7 +1,6 @@
 package ru.gb.MyMarket.market.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +34,10 @@ public class UserService implements UserDetailsService {
         user.setRoles(new ArrayList<>());
         user.getRoles().add(role);
         return userRepository.save(user);
+    }
+
+    public boolean existsByUsername(String username){
+        return userRepository.existsByUsername(username);
     }
 
     @Override

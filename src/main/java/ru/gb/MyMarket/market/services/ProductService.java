@@ -12,7 +12,7 @@ import ru.gb.MyMarket.market.models.Category;
 import ru.gb.MyMarket.market.models.Product;
 import ru.gb.MyMarket.market.repositories.ProductRepository;
 
-import java.util.List;
+
 import java.util.Optional;
 
 @Service
