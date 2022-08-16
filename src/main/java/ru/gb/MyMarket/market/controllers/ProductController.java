@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.MyMarket.market.dto.ProductDto;
 import ru.gb.MyMarket.market.exceptions.DataValidationException;
 import ru.gb.MyMarket.market.exceptions.ResourceNotFoundException;
-import ru.gb.MyMarket.market.models.Cart;
 import ru.gb.MyMarket.market.models.Category;
 import ru.gb.MyMarket.market.models.Product;
 import ru.gb.MyMarket.market.services.CategoryService;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
-    private final Cart cart;
 
 
     @GetMapping("/")
@@ -33,7 +31,6 @@ public class ProductController {
         if (pageIndex < 1) {
             pageIndex = 1;
         }
-        System.out.println(cart);
         return productService.findAll(pageIndex - 1, 10).map(ProductDto::new);
     }
 
@@ -75,12 +72,4 @@ public class ProductController {
         productService.deleteById(id);
     }
 
-    @PostMapping("/addToCart/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void addToCart(@PathVariable Long id) {
-        cart.getProducts()
-                .add(new ProductDto(productService
-                        .findById(id)
-                        .orElseThrow(() -> new ResourceNotFoundException("Product id = " + id + " not found"))));
-    }
 }

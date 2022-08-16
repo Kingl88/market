@@ -12,6 +12,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
 <!--    Подключаем локальное хранилище для браузера-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
     <script src="index.js"></script>
@@ -29,7 +30,7 @@
                         <a class="nav-link" href="#!/store">Product catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#!/createProduct">Create product</a>
+                        <a class="nav-link" ng-show="isUserLoggedIn()" href="#!/createProduct">Create product</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#!/cart">Cart</a>

@@ -13,7 +13,7 @@
 (function () {
     angular
         .module('market-front', ['ngRoute', 'ngStorage']) //подключаем дополнительный модуль 'ngRoute'
-        .config(config) // конфигурируем приложение
+        .config(config) //конфигурируем приложение
         .run(run); //запускаем приложение
 
     function config($routeProvider) {
@@ -51,6 +51,12 @@
         if ($localStorage.webMarketUser) {
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webMarketUser.token;
         }
+        if(!$localStorage.webGuestCartId){
+            $http.get('http://localhost:8189/market/api/v1/cart/generate')
+                .then(function successCallback(response){
+                $localStorage.webGuestCartId = response.data.value;
+            });
+        }
     }
 })();
 angular.module('market-front').controller('indexController', function ($rootScope, $scope, $http, $localStorage) {
@@ -61,12 +67,16 @@ angular.module('market-front').controller('indexController', function ($rootScop
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.webMarketUser = {username: $scope.user.username, token: response.data.token};
-
                     $scope.user.username = null;
                     $scope.user.password = null;
                 }
+                $http.get(contextPath + '/cart/' + $localStorage.webGuestCartId + '/merge').then(function successCallback(response){
+                    console.log(response);
+                });
+                location.reload();
             }, function errorCallback(response) {
             });
+
     };
 
     $scope.tryToLogout = function () {
@@ -82,6 +92,7 @@ angular.module('market-front').controller('indexController', function ($rootScop
     $scope.clearUser = function () {
         delete $localStorage.webMarketUser;
         $http.defaults.headers.common.Authorization = '';
+        location.reload()
     };
 
     $rootScope.isUserLoggedIn = function () {
