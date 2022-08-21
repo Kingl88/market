@@ -5,7 +5,6 @@ import lombok.Setter;
 import ru.gb.MyMarket.market.models.Product;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -20,43 +19,52 @@ public class Cart {
     }
 
     public void add(Product product) {
-        if (add(product.getId())) {
+        if (increment(product.getId())) {
             return;
         }
         items.add(new CartItem(product));
         recalculate();
     }
 
-    public boolean add(Long productId) {//если продукт с productId есть в списке, то увеличиваем его число на 1.
-        for (CartItem item : items) {
-            if (item.getProductId().equals(productId)) {
-                item.changeCount(1);
-                recalculate();
-                return true;
-            }
-        }
-        return false;
+    private boolean increment(Long productId) {//если продукт с productId есть в списке, то увеличиваем его число на 1.
+       return items.stream().filter(item->item.getProductId().equals(productId)).peek(item-> {
+            item.changeCount(1);
+            recalculate();
+        }).anyMatch(item->item.getProductId().equals(productId));
+//        for (CartItem item : items) {
+//            if (item.getProductId().equals(productId)) {
+//                item.changeCount(1);
+//                recalculate();
+//                return true;
+//            }
+//        }
+//        return false;
     }
 
-    public void decrement(Long productId){//метод для уменьшения количества продукта в корзине, при условии если колчество продукта становится <=0 то удаляем продукт из списка.
-        Iterator<CartItem> iterator = items.iterator();
-        while (iterator.hasNext()){
-            CartItem item = iterator.next();
-            if(item.getProductId().equals(productId)){
-                item.changeCount(-1);
-                if(item.getCount() <= 0){
-                    iterator.remove();
-                }
-                recalculate();
-                return;
-            }
-        }
+    public void decrement(Long productId) {//метод для уменьшения количества продукта в корзине, при условии если колчество продукта становится <=0 то удаляем продукт из списка.
+        items.stream().filter(c -> c.getProductId().equals(productId)).peek(c -> c.changeCount(-1)).toList();
+        items.removeIf(c -> c.getCount() <= 0);
+        recalculate();
+//        Iterator<CartItem> iterator = items.iterator();
+//        while (iterator.hasNext()){
+//            CartItem item = iterator.next();
+//            if(item.getProductId().equals(productId)){
+//                item.changeCount(-1);
+//                if(item.getCount() <= 0){
+//                    iterator.remove();
+//                }
+//                recalculate();
+//                return;
+//            }
+        //       }
     }
-    public void remove(Long productId){//удаление продукта из корзины
-        items.removeIf(item->item.getProductId().equals(productId));
+
+    public void remove(Long productId) {//удаление продукта из корзины
+        items.removeIf(item -> item.getProductId().equals(productId));
         recalculate();
     }
-    public void clear(){//очистка корзины
+
+    public void clear() {//очистка корзины
         items.clear();
         totalPrice = 0;
     }
