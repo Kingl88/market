@@ -82,7 +82,9 @@ angular.module('market-front').controller('indexController', function ($rootScop
             });
 
     };
-
+    $scope.closeAlertForDownloading = () => {
+        $localStorage.isCreatedReport = false;
+    }
     $scope.tryToLogout = function () {
         $scope.clearUser();
         if ($scope.user.username) {
@@ -98,7 +100,8 @@ angular.module('market-front').controller('indexController', function ($rootScop
         $http.defaults.headers.common.Authorization = '';
         location.reload()
     };
-
+    $scope.link = $localStorage.linkForDownloadReport;
+    $scope.fileCreated = $localStorage.isCreatedReport;
     $rootScope.isUserLoggedIn = function () {
         if ($localStorage.webMarketUser) {
             return true;

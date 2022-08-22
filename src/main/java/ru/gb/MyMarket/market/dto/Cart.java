@@ -6,6 +6,7 @@ import ru.gb.MyMarket.market.models.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Setter
@@ -42,7 +43,7 @@ public class Cart {
     }
 
     public void decrement(Long productId) {//метод для уменьшения количества продукта в корзине, при условии если колчество продукта становится <=0 то удаляем продукт из списка.
-        items.stream().filter(c -> c.getProductId().equals(productId)).peek(c -> c.changeCount(-1)).toList();
+        items.stream().filter(c -> c.getProductId().equals(productId)).peek(c -> c.changeCount(-1)).collect(Collectors.toList());
         items.removeIf(c -> c.getCount() <= 0);
         recalculate();
 //        Iterator<CartItem> iterator = items.iterator();

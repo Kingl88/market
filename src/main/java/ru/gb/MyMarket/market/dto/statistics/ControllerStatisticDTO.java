@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Data
@@ -16,7 +17,7 @@ public class ControllerStatisticDTO {
     private Long totalTime;
     public void addMethod(String methodName, Long time){
         if(methods.stream().anyMatch(c->c.getNameMethod().equals(methodName))){
-            methods.stream().filter(item->item.getNameMethod().equals(methodName)).peek(c->c.addTime(time)).toList();
+            methods.stream().filter(item->item.getNameMethod().equals(methodName)).peek(c->c.addTime(time)).collect(Collectors.toList());
             totalTime+= time;
         }
         else{

@@ -1,4 +1,4 @@
-package ru.gb.MyMarket.market.utils;
+package ru.gb.MyMarket.market.utils.jwtToken;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

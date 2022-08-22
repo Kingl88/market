@@ -30,7 +30,6 @@ angular.module('market-front').controller('storeController', function ($scope, $
                 document.getElementById("previewButton").removeAttribute("disabled");
                 document.getElementById("previewButton").setAttribute("style", "color: #0d6efd");
             }
-            console.log(document.getElementById("previewButton"));
         });
     }
 

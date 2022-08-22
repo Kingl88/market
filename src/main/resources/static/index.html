@@ -13,11 +13,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
     <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
-<!--    Подключаем локальное хранилище для браузера-->
+    <!--    Подключаем локальное хранилище для браузера-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+    <script src="webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="webjars/jquery/jquery.min.js"></script>
     <script src="index.js"></script>
 </head>
 <body ng-app="market-front">
+
 <div class="container" ng-controller="indexController">
     <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
         <div class="container-fluid">
@@ -44,7 +48,8 @@
                                 <input id="navLoginField" class="form-control" ng-model="user.username" type="text"
                                        aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
 
-                                <input id="navPasswordField" class="form-control" ng-model="user.password" type="password"
+                                <input id="navPasswordField" class="form-control" ng-model="user.password"
+                                       type="password"
                                        aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
 
                                 <button id="navLoginSubmit" class="btn btn-outline-secondary btn-sm"
@@ -57,12 +62,16 @@
                         <a class="btn btn-outline-secondary btn-sm" href="#!/createUser">SignUp</a>
                     </li>
                     <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
-                        <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()" >SignOut</button>
+                        <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">SignOut</button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <div ng-show = "{{fileCreated}}" id="reportCreated" class="alert alert-success alert-dismissible" role="alert">
+        <div>Отчет сформирован, для скачивания перейдите по <a href="{{link}}">ссылке</a></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" ng-click="closeAlertForDownloading()" aria-label="Close"></button>
+    </div>
 
 
     <ng-view></ng-view>

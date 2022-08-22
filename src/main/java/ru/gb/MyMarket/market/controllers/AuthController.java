@@ -15,7 +15,7 @@ import ru.gb.MyMarket.market.dto.AuthRequest;
 import ru.gb.MyMarket.market.dto.AuthResponse;
 import ru.gb.MyMarket.market.exceptions.MarketException;
 import ru.gb.MyMarket.market.services.UserService;
-import ru.gb.MyMarket.market.utils.JwtTokenUtil;
+import ru.gb.MyMarket.market.utils.jwtToken.JwtTokenUtil;
 
 
 @RestController
