@@ -19,6 +19,8 @@ public class Product {
     private String title;
     @Column(name = "price")
     private int price;
+    @Column(name = "count")
+    private int count;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

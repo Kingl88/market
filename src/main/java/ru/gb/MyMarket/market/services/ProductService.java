@@ -13,6 +13,7 @@ import ru.gb.MyMarket.market.models.Product;
 import ru.gb.MyMarket.market.repositories.ProductRepository;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +24,10 @@ public class ProductService {
 
     public Page<Product> findAll(int pageIndex, int pageSize) {
         return productRepository.findAll(PageRequest.of(pageIndex, pageSize, Sort.by("id").ascending()));
+    }
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
     public Optional<Product> findById(Long id) {
