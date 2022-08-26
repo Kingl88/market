@@ -2,7 +2,7 @@ angular.module('market-front').controller('statisticController', function ($scop
     let stompClient = null;
 
     function connect() {
-        let socket = new SockJS('ws');
+        let socket = new SockJS('http://localhost:8189/market/ws');
         console.log(socket);
         stompClient = Stomp.over(socket);
         console.log(stompClient);

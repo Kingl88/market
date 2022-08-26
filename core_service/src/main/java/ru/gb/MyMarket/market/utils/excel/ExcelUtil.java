@@ -21,10 +21,9 @@ import java.util.List;
 @Slf4j
 public class ExcelUtil {
     private XSSFWorkbook workbook = new XSSFWorkbook();
-    private XSSFSheet sheet = workbook.createSheet("Products");
-    ;
+    private final XSSFSheet sheet = workbook.createSheet("Products");
     private final String FILE_NAME = "products.xlsx";
-    private File file = new File(FILE_NAME);
+    private final File file = new File(FILE_NAME);
     private int rowNumber;
     private Cell cell;
     private Row row;
@@ -41,7 +40,7 @@ public class ExcelUtil {
             config();
         }
         writeProductInSheet(products);
-        FileOutputStream outFile = null;
+        FileOutputStream outFile;
         try {
             outFile = new FileOutputStream(file, false);
             workbook.write(outFile);
@@ -60,7 +59,7 @@ public class ExcelUtil {
         XSSFCellStyle style = workbook.createCellStyle();
         style.setFont(font);
         row = sheet.createRow(rowNumber);
-        // Product Id
+        // Product ID
         cell = row.createCell(0, CellType.NUMERIC);
         cell.setCellValue("№");
         cell.setCellStyle(style);
@@ -82,7 +81,7 @@ public class ExcelUtil {
         for (Product product : products) {
             rowNumber++;
             row = sheet.createRow(rowNumber);
-            // Product Id
+            // Product ID
             cell = row.createCell(0, CellType.NUMERIC);
             cell.setCellValue(product.getId());
             // Product Title

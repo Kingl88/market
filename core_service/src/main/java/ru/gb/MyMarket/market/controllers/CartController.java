@@ -13,6 +13,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/v1/cart")
+@CrossOrigin("*")
 public class CartController {
     private final CartService cartService;
 
