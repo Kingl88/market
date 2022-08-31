@@ -56,7 +56,7 @@
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.webMarketUser.token;
         }
         if (!$localStorage.webGuestCartId) {
-            $http.get('http://localhost:8189/market/api/v1/cart/generate')
+            $http.get('http://localhost:5555/cart/api/v1/cart/generate')
                 .then(function successCallback(response) {
                     $localStorage.webGuestCartId = response.data.value;
                 });
@@ -64,7 +64,7 @@
     }
 })();
 angular.module('market-front').controller('indexController', function ($rootScope, $scope, $http, $localStorage) {
-    const contextPath = 'http://localhost:8189/market/api/v1';
+    const contextPath = 'http://localhost:5555/auth/api/v1';
     $scope.tryToAuth = function () {
         $http.post(contextPath + '/auth', $scope.user)
             .then(function successCallback(response) {
@@ -74,7 +74,7 @@ angular.module('market-front').controller('indexController', function ($rootScop
                     $scope.user.username = null;
                     $scope.user.password = null;
                 }
-                $http.get(contextPath + '/cart/' + $localStorage.webGuestCartId + '/merge').then(function successCallback(response) {
+                $http.get('http://localhost:5555/cart/api/v1/cart/' + $localStorage.webGuestCartId + '/merge').then(function successCallback(response) {
                     console.log(response);
                 });
                 location.reload();

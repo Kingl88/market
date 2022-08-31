@@ -1,11 +1,13 @@
 angular.module('market-front').controller('cartController', function ($scope, $http, $localStorage) {
-    const contextPath = 'http://localhost:8189/market/api/v1/cart/';
+    const contextPath = 'http://localhost:5555/cart/api/v1/cart/';
 
     $scope.loadCart = function () {
         $http.get(contextPath + $localStorage.webGuestCartId)
-            .then(function (response) {
+            .then(function successCallback(response){
                 console.log(response);
                 $scope.cart = response;
+            }, function errorCallback(response) {
+                console.log(response);
             });
     }
 
