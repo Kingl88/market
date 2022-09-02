@@ -5,10 +5,10 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/auth
+    url: jdbc:postgresql://localhost:5434/auth
     hikari:
       username: postgres
-      password: postgrespw
+      password: postgres
   jpa:
     show-sql: true
     properties:

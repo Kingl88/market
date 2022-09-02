@@ -1,9 +1,13 @@
 package ru.gb.market.api.cart;
 
-import java.util.List;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.List;
+@Schema(description = "Модель корзины")
 public class CartDto {
+    @Schema(description = "Список продуктов в корзине", required = true)
     private  List<CartItemDto> items;
+    @Schema(description = "Общая стоимость продуктов в корзине", required = true)
     private int totalPrice;
 
     public CartDto(List<CartItemDto> items, int totalPrice) {

@@ -8,3 +8,6 @@ utils:
 integration:
   core-service:
     url: http://localhost:5555/core
+#springdoc:
+#  swagger-ui:
+#    path: http://localhost:8187/api-docs
