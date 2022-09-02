@@ -1,5 +1,5 @@
 angular.module('market-front').controller('storeController', function ($scope, $http, $location, $localStorage) {
-    const contextPath = 'http://localhost:8189/market/api/v1';
+    const contextPath = 'http://localhost:5555/core/api/v1';
     let pageDefault = 1;
 
     $scope.loadProducts = function (pageIndex = 1) {
@@ -63,7 +63,7 @@ angular.module('market-front').controller('storeController', function ($scope, $
         $location.path('/updateProduct/' + productId);
     }
     $scope.addToCart = function (product) {
-        $http.get(contextPath + '/cart/'+ $localStorage.webGuestCartId + '/add/' + product.id).then(function (response) {
+        $http.get('http://localhost:5555/cart/api/v1' + '/cart/'+ $localStorage.webGuestCartId + '/add/' + product.id).then(function (response) {
             console.log(response);
             $scope.loadProducts(pageDefault);
         })

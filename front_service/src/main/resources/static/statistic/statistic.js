@@ -2,7 +2,7 @@ angular.module('market-front').controller('statisticController', function ($scop
     let stompClient = null;
 
     function connect() {
-        let socket = new SockJS('http://localhost:8189/market/ws');
+        let socket = new SockJS('http://localhost:5555/core/ws');
         console.log(socket);
         stompClient = Stomp.over(socket);
         console.log(stompClient);
@@ -25,7 +25,7 @@ angular.module('market-front').controller('statisticController', function ($scop
         console.log("Disconnected");
     }
 
-    const contextPath = 'http://localhost:8189/market/api/v1/statistic';
+    const contextPath = 'http://localhost:5555/core/api/v1/statistic';
     $scope.loadStatistic = () => {
         $http.get(contextPath + '/')
             .then(function (response) {
