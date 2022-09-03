@@ -8,13 +8,16 @@
     <artifactId>api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>7.0.5.Final</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.11</version>
+        </dependency>
     </dependencies>
 
     <properties>
