@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gb.market.auth.entities.Profile;
 import ru.gb.market.auth.entities.Role;
 import ru.gb.market.auth.entities.User;
 import ru.gb.market.auth.repositiries.UserRepository;
@@ -24,11 +25,14 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ProfileService profileService;
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     public User save(User user){//сохранение пользователя в базе данных
+        Profile profile = user.getProfile();
+        profileService.save(profile);
         Role role = roleService.findByName("ROLE_USER").orElseThrow(() -> new UsernameNotFoundException("Role: \"ROLE_USER\" not found"));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new ArrayList<>());

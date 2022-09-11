@@ -46,6 +46,10 @@
                 templateUrl: 'statistic/statistic.html',
                 controller: 'statisticController'
             })
+            .when('/order', {
+                templateUrl: 'order/order.html',
+                controller: 'orderController'
+            })
             .otherwise({
                 redirectTo: '/' //если указываем путь, которого нету в перечисление делаем редирект на '/'
             });

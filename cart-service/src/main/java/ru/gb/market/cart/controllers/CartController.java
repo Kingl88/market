@@ -38,8 +38,7 @@ public class CartController {
                            @Parameter(description = "Уникальный набор символов для неавторизованного пользователя") String username,
                            @PathVariable
                            @Parameter(description = "Имя пользователя из header") String uuid) {//@RequestHeader(required = false) - достаем "username" из header
-        CartDto cartDto = mapper.mapToDto(cartService.getCurrentCart(getCurrentCartUuid(username, uuid)));
-        return cartDto;
+        return mapper.mapToDto(cartService.getCurrentCart(getCurrentCartUuid(username, uuid)));
     }
 
     @Operation(

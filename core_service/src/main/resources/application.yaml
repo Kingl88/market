@@ -16,6 +16,3 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
-jwt:
-  secret: kl4njk34j234j23jk4njk23n4j234jn23kjn4qwnrjknl;;'gdjjr235ml;
-  lifetime: 3600000
