@@ -2,15 +2,26 @@
 
 --changeset Siarhei:Create_tables
 
+create table profiles
+(
+    id         bigserial primary key,
+    first_name varchar(30),
+    last_name  varchar(80),
+    email      varchar(100),
+    updated_at timestamp default current_timestamp
+);
 
 create table users
 (
     id         bigserial primary key,
     username   varchar(30) unique,
     password   varchar(80) not null,
+    profile_id bigint,
+    FOREIGN KEY (profile_id) REFERENCES profiles (id),
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
 );
+
 
 create table roles
 (

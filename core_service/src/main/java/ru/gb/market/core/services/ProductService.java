@@ -6,8 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gb.market.api.dto.PageDto;
 import ru.gb.market.api.exception.ResourceNotFoundException;
 import ru.gb.market.api.core.ProductDto;
+import ru.gb.market.core.mapper.product.ProductMapper;
 import ru.gb.market.core.models.Category;
 import ru.gb.market.core.models.Product;
 import ru.gb.market.core.repositories.ProductRepository;
@@ -22,8 +24,11 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
 
-    public Page<Product> findAll(int pageIndex, int pageSize) {
-        return productRepository.findAll(PageRequest.of(pageIndex, pageSize, Sort.by("id").ascending()));
+    //    public Page<Product> findAllProduct(int pageIndex, int pageSize) {
+//        return productRepository.findAll(PageRequest.of(pageIndex, pageSize, Sort.by("id").ascending()));
+//    }
+    public PageDto<Product> findAll(int pageIndex, int pageSize) {
+        return new PageDto<>(pageIndex, pageSize, productRepository.findAll());
     }
 
     public List<Product> findAll() {

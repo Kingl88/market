@@ -5,7 +5,7 @@ angular.module('market-front').controller('storeController', function ($scope, $
     $scope.loadProducts = function (pageIndex = 1) {
         pageDefault = pageIndex;
         $http({
-            url: contextPath + '/products/',
+            url: contextPath + '/demo/',
             method: 'GET',
             params: {
                 page: pageIndex
@@ -14,6 +14,12 @@ angular.module('market-front').controller('storeController', function ($scope, $
             console.log(response);
             $scope.productsPage = response.data;
             $scope.paginationArray = $scope.generatePageIndexes(1, $scope.productsPage.totalPages);
+            if (response.data.totalPages === 1){
+                document.getElementById("previewButton").setAttribute("disabled", "true");
+                document.getElementById("previewButton").setAttribute("style", "color: grey");
+                document.getElementById("nextButton").setAttribute("disabled", "true");
+                document.getElementById("nextButton").setAttribute("style", "color: grey");
+            } else
             if (response.data.first) {
                 document.getElementById("previewButton").setAttribute("disabled", "true");
                 document.getElementById("previewButton").setAttribute("style", "color: grey");
@@ -24,7 +30,8 @@ angular.module('market-front').controller('storeController', function ($scope, $
                 document.getElementById("nextButton").setAttribute("style", "color: grey");
                 document.getElementById("previewButton").setAttribute("style", "color: #0d6efd");
                 document.getElementById("previewButton").removeAttribute("disabled");
-            } else {
+            } else
+            {
                 document.getElementById("nextButton").removeAttribute("disabled");
                 document.getElementById("nextButton").setAttribute("style", "color: #0d6efd");
                 document.getElementById("previewButton").removeAttribute("disabled");
@@ -63,7 +70,7 @@ angular.module('market-front').controller('storeController', function ($scope, $
         $location.path('/updateProduct/' + productId);
     }
     $scope.addToCart = function (product) {
-        $http.get('http://localhost:5555/cart/api/v1' + '/cart/'+ $localStorage.webGuestCartId + '/add/' + product.id).then(function (response) {
+        $http.get('http://localhost:5555/cart/api/v1' + '/cart/' + $localStorage.webGuestCartId + '/add/' + product.id).then(function (response) {
             console.log(response);
             $scope.loadProducts(pageDefault);
         })

@@ -1,18 +1,19 @@
 package ru.gb.market.auth.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "users")
 public class User {
     @Id
@@ -29,7 +30,9 @@ public class User {
     @Length(min = 8, max = 255, message = "The length of the password should be min 8 characters")
     @Column(name = "password")
     private String password;
-
+    @OneToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),

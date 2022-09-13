@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.gb.market.api.dto.PageDto;
 import ru.gb.market.api.exception.ResourceNotFoundException;
 import ru.gb.market.api.exception.DataValidationException;
 import ru.gb.market.core.models.Category;
@@ -26,14 +27,21 @@ public class ProductController {
     private final ProductService productService;
     private final ProductMapper mapper;
 
-
     @GetMapping("/")
-    public Page<ProductDto> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex) {
+    public PageDto<ProductDto> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex) {
         if (pageIndex < 1) {
             pageIndex = 1;
         }
-        return productService.findAll(pageIndex - 1, 10).map(mapper::mapToDto);
+        PageDto<Product> temp = productService.findAll(pageIndex - 1, 10);
+        return temp.convert(temp, mapper::mapToDto);
     }
+//    @GetMapping("/")
+//    public Page<ProductDto> findAllProduct(@RequestParam(name = "page", defaultValue = "1") int pageIndex) {
+//        if (pageIndex < 1) {
+//            pageIndex = 1;
+//        }
+//        return productService.findAllProduct(pageIndex - 1, 10).map(mapper::mapToDto);
+//    }
 
     @GetMapping("/{id}")
     public ProductDto findById(@PathVariable Long id) {

@@ -3,6 +3,7 @@ package ru.gb.market.core.mapper.product;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.gb.market.api.core.ProductDto;
 import ru.gb.market.core.models.Product;
 import ru.gb.market.core.services.CategoryService;
@@ -10,6 +11,7 @@ import ru.gb.market.core.services.CategoryService;
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public abstract class ProductMapper {
 
+    @Autowired
     protected CategoryService categoryService;
 
     @Mapping(target = "categoryTitle", source = "category.title")//аннотация означает что в поле ProductDto.categoryTitle будет мапится стринговое значение из category.title

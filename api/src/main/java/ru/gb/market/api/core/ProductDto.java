@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Objects;
+
 
 public class ProductDto {
     private Long id;
@@ -55,5 +57,18 @@ public class ProductDto {
     }
 
     public ProductDto() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDto that = (ProductDto) o;
+        return price == that.price && Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(categoryTitle, that.categoryTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, price, categoryTitle);
     }
 }
