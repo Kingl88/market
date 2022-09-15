@@ -2,18 +2,20 @@ package ru.gb.market.api.order;
 
 public class OrderItemDto {
     private Long productId;
+    private String productTitle;
     private int count;
     private int pricePerProduct;
     private int price;
 
-    public OrderItemDto(Long productId, int count, int pricePerProduct, int price) {
+    public OrderItemDto() {
+    }
+
+    public OrderItemDto(Long productId, String productTitle, int count, int pricePerProduct, int price) {
         this.productId = productId;
+        this.productTitle = productTitle;
         this.count = count;
         this.pricePerProduct = pricePerProduct;
         this.price = price;
-    }
-
-    public OrderItemDto() {
     }
 
     public Long getProductId() {
@@ -48,4 +50,11 @@ public class OrderItemDto {
         this.price = price;
     }
 
+    public String getProductTitle() {
+        return productTitle;
+    }
+
+    public void setProductTitle(String productTitle) {
+        this.productTitle = productTitle;
+    }
 }

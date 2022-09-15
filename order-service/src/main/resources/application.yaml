@@ -16,6 +16,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
 integrations:
   cart-service:
     url: http://localhost:5555/cart

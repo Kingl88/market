@@ -16,3 +16,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: my_market

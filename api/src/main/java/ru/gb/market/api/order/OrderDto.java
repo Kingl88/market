@@ -9,15 +9,15 @@ public class OrderDto {
     private String address;
     private String phone;
 
+    public OrderDto() {
+    }
+
     public OrderDto(String username, Integer totalPrice, List<OrderItemDto> items, String address, String phone) {
         this.username = username;
         this.totalPrice = totalPrice;
         this.items = items;
         this.address = address;
         this.phone = phone;
-    }
-
-    public OrderDto() {
     }
 
     public String getUsername() {

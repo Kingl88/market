@@ -5,7 +5,7 @@ angular.module('market-front').controller('storeController', function ($scope, $
     $scope.loadProducts = function (pageIndex = 1) {
         pageDefault = pageIndex;
         $http({
-            url: contextPath + '/demo/',
+            url: contextPath + '/products/',
             method: 'GET',
             params: {
                 page: pageIndex

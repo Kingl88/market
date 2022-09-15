@@ -15,6 +15,14 @@ angular.module('market-front').controller('statisticController', function ($scop
                 location.reload();
                 disconnect();
             });
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/getFileAboutOrders', function (response) {
+                console.log(response.body);
+                $localStorage.isCreatedReport = response.body;
+                $localStorage.linkForDownloadReport = contextPath + '/getFileAboutOrders';
+                location.reload();
+                disconnect();
+            });
         });
     }
 
@@ -33,8 +41,11 @@ angular.module('market-front').controller('statisticController', function ($scop
                 $scope.statistic = response.data;
             });
     }
-    $scope.getFile = function () {
-        stompClient.send('/app/giveMeFile');
+    $scope.getFileProducts = function () {
+        stompClient.send('/app/giveMeFileAboutProducts');
+    }
+    $scope.getFileOrders = function () {
+        stompClient.send('/app/giveMeFileAboutOrders');
     }
     if ($localStorage.isCreatedReport == null || $localStorage.isCreatedReport === false) {
         connect();

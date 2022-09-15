@@ -27,7 +27,7 @@ public class ProductController {
     private final ProductService productService;
     private final ProductMapper mapper;
 
-    @GetMapping("/")
+    @GetMapping
     public PageDto<ProductDto> findAll(@RequestParam(name = "page", defaultValue = "1") int pageIndex) {
         if (pageIndex < 1) {
             pageIndex = 1;
@@ -65,7 +65,7 @@ public class ProductController {
         return mapper.mapToDto(product);
     }
 
-    @PutMapping("/")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody ProductDto productDto) {
         productService.updateProductFromDto(productDto);

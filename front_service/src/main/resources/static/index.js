@@ -81,7 +81,7 @@ angular.module('market-front').controller('indexController', function ($rootScop
                 $http.get('http://localhost:5555/cart/api/v1/cart/' + $localStorage.webGuestCartId + '/merge').then(function successCallback(response) {
                     console.log(response);
                 });
-                location.reload();
+                // location.reload();
             }, function errorCallback(response) {
             });
 

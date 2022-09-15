@@ -23,6 +23,8 @@ public class OrderItem {
     private Long id;
     @Column(name = "product_id")
     private Long productId;
+    @Column(name = "product_title")
+    private String productTitle;
     @Column(name = "count")
     private int count;
     @Column(name = "price_per_product")

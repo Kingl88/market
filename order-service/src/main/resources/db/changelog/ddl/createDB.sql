@@ -17,6 +17,7 @@ create table order_items
 (
     id                bigserial primary key,
     product_id        bigint not null,
+    product_title     varchar(255) not null ,
     count             int    not null,
     price_per_product int    not null,
     price             int    not null,
