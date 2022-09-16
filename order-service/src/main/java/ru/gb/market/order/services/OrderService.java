@@ -30,6 +30,7 @@ public class OrderService {
         {
             OrderItem item = new OrderItem();
             item.setProductId(o.getProductId());
+            item.setProductTitle(o.getProductTitle());
             item.setOrder(order);
             item.setCount(o.getCount());
             item.setPricePerProduct(o.getPricePerProduct());
