@@ -1,4 +1,4 @@
-package ru.gb.market.order.integrations;
+package ru.gb.market.order.entities.integrations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

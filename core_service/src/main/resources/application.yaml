@@ -20,3 +20,11 @@ spring:
     consumer:
       bootstrap-servers: localhost:9092
       group-id: my_market
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http//localhost:8080/auth/realms/market
+jwt:
+  secret: kl4njk34j234j23jk4njk23n4j234jn23kjn4qwnrjknl;;'gdjjr235ml;
+  lifetime: 3600000

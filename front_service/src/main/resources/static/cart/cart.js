@@ -1,5 +1,6 @@
 angular.module('market-front').controller('cartController', function ($scope, $http, $localStorage) {
     const contextPath = 'http://localhost:5555/cart/api/v1/cart/';
+    console.log(localStorage.webMarketUser.token);
     let sizeListProduct;
     $scope.loadCart = function () {
         $http.get(contextPath + $localStorage.webGuestCartId)
@@ -51,6 +52,7 @@ angular.module('market-front').controller('cartController', function ($scope, $h
     }
 
     $scope.deleteProduct = function (item) {
+        $http.headers.append()
         $http.get(contextPath + $localStorage.webGuestCartId + '/remove/' + item.productId).then(function (response) {
             console.log(response);
             $scope.loadCart();
