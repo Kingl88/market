@@ -50,6 +50,10 @@
                 templateUrl: 'order/order.html',
                 controller: 'orderController'
             })
+            .when('/auth', {
+                templateUrl: 'auth/auth.html',
+                controller: 'authController'
+            })
             .otherwise({
                 redirectTo: '/' //если указываем путь, которого нету в перечисление делаем редирект на '/'
             });
@@ -109,15 +113,15 @@ angular.module('market-front').controller('indexController', function ($rootScop
                 $http.get('http://localhost:5555/cart/api/v1/cart/' + $localStorage.webGuestCartId + '/merge').then(function successCallback(response) {
                     console.log(response);
                 });
-                // location.reload();
+                location.reload();
             }, function errorCallback(response) {
             });
 
     };
-    $scope.authWithKeycloak = function () {
-
-        window.location = "http://localhost:8090/realms/market-realm/protocol/openid-connect/auth?response_type=code&client_id=market-client&state=gdfdffghfshbbsfhsdfhsdf&scope=profile&redirect_uri=http://localhost:3000/front/";
-    }
+    // $scope.authWithKeycloak = function () {
+    //
+    //     window.location = "http://localhost:8090/realms/market-realm/protocol/openid-connect/auth?response_type=code&client_id=market-client&state=gdfdffghfshbbsfhsdfhsdf&scope=profile&redirect_uri=http://localhost:3000/front/";
+    // }
     $scope.closeAlertForDownloading = () => {
         $localStorage.isCreatedReport = false;
     }

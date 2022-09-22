@@ -24,7 +24,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http//localhost:8080/auth/realms/market
+          issuer-uri: http://localhost:8090/realms/market-realm
 jwt:
   secret: kl4njk34j234j23jk4njk23n4j234jn23kjn4qwnrjknl;;'gdjjr235ml;
   lifetime: 3600000

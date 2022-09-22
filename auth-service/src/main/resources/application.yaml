@@ -17,5 +17,5 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.yaml
 jwt:
-  secret: boBxOleudoIltxiFYPheNYRnB3Cio2tM
+  secret: e4Tft6a9okn4nECCe34H8LL1KN7IxXFn
   lifetime: 3600000

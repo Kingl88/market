@@ -7,7 +7,7 @@ import ru.gb.market.api.cart.CartDto;
 import ru.gb.market.api.order.OrderDetailsDto;
 import ru.gb.market.order.entities.Order;
 import ru.gb.market.order.entities.OrderItem;
-import ru.gb.market.order.entities.integrations.CartServiceIntegration;
+import ru.gb.market.order.integrations.CartServiceIntegration;
 import ru.gb.market.order.repositories.OrderRepository;
 
 import java.util.List;
