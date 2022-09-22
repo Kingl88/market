@@ -61,6 +61,11 @@
                     <li class="nav-item" ng-show="!isUserLoggedIn()" style="padding: 4px;">
                         <a class="btn btn-outline-secondary btn-sm" href="#!/createUser">SignUp</a>
                     </li>
+                    <li class="nav-item" ng-show="!isUserLoggedIn()" style="padding: 4px;">
+                        <button class="btn btn-outline-secondary btn-sm" ng-click="authWithKeycloak()"
+                                style="margin-left: 10px;">SignInWithCloak
+                        </button>
+                    </li>
                     <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
                         <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">SignOut</button>
                     </li>

@@ -10,9 +10,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class SecurityConfiguration { //класс для конфигурации SpringSecurity версия Spring Security 5.7.0 и выше
+
+    @Bean
+    public RestTemplate restTemplate(){//создаем бин для общения между микросервисами
+        return new RestTemplate();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //создаем бин SecurityFilter в цепочке фильтров для запроса
         http

@@ -13,10 +13,12 @@ public class JwtUtil {
     private String secret;
 
     public Claims getAllClaimsFromToken(String token) {//парсим токен и получаем Claims
-        return Jwts.parser()
+
+        Claims claims = Jwts.parser()
                 .setSigningKey(secret)
-                .parseClaimsJws(token)
+                .parseClaimsJwt(token)
                 .getBody();
+        return claims;
     }
 
     private boolean isTokenExpired(String token) {//проверяем "протух" токен или нет
