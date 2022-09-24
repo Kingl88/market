@@ -62,9 +62,10 @@
                         <a class="btn btn-outline-secondary btn-sm" href="#!/createUser">SignUp</a>
                     </li>
                     <li class="nav-item" ng-show="!isUserLoggedIn()" style="padding: 4px;">
-                        <button class="btn btn-outline-secondary btn-sm" ng-click="authWithKeycloak()"
-                                style="margin-left: 10px;">SignInWithCloak
-                        </button>
+                        <a class="btn btn-outline-secondary btn-sm" href="#!/auth">SignInWithCloak</a>
+<!--                        <button class="btn btn-outline-secondary btn-sm" ng-click="authWithKeycloak()"-->
+<!--                                style="margin-left: 10px;">SignInWithCloak-->
+<!--                        </button>-->
                     </li>
                     <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
                         <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">SignOut</button>
@@ -90,6 +91,7 @@
     <script src="cart/cart.js"></script>
     <script src="statistic/statistic.js"></script>
     <script src="order/order.js"></script>
+    <script src="auth/auth.js"></script>
 </div>
 </body>
 </html>

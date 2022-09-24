@@ -16,7 +16,7 @@ public class JwtUtil {
 
         Claims claims = Jwts.parser()
                 .setSigningKey(secret)
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
         return claims;
     }

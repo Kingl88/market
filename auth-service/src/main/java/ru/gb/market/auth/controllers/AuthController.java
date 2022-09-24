@@ -47,15 +47,16 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));//возвращаем токен, и на клиентской стороне подшиваем его в Header
     }
     @PostMapping("/auth/keycloak")
-    public ResponseEntity<?> createTokenFromKeycloak(@RequestBody String code){
+    public ResponseEntity<?> createTokenFromKeycloak(@RequestBody AuthRequest authRequest){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("grant_type","authorization_code");
+        map.add("grant_type","password");
         map.add("client_id","market-client");
         map.add("client_secret",secret);
-        map.add("code",code);
-        map.add("redirect_uri","http://localhost:3000/front/");
+        map.add("scope","profile");
+        map.add("username", authRequest.getUsername());
+        map.add("password", authRequest.getPassword());
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
         ResponseEntity<LinkedHashMap<String, ?>> response =
                 restTemplate.exchange("http://localhost:8090/realms/market-realm/protocol/openid-connect/token",
