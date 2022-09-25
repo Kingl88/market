@@ -1,4 +1,4 @@
-angular.module('market-front').controller('orderController', function ($scope, $http, $localStorage) {
+angular.module('market-front').controller('orderDetailsController', function ($scope, $http, $localStorage, $location) {
     const contextPath = 'http://localhost:5555/cart/api/v1/cart/';
     let sizeListProduct;
     $scope.loadCart = function () {
@@ -13,8 +13,14 @@ angular.module('market-front').controller('orderController', function ($scope, $
     }
 
     $scope.sendOrder = function () {
-            $http.post('http://localhost:5555/order/api/v1/orders/createOrder', $scope.detailsForOrder);
-        $scope.loadCart();
+        $http.post('http://localhost:5555/order/api/v1/orders/createOrder', $scope.detailsForOrder).then (function successCallback(response) {
+            console.log(response);
+            // $scope.clearCart();
+            $location.path('/order_pay/' + response.data);
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+
     }
 
     $scope.isCartEmpty = function () {

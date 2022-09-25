@@ -16,8 +16,8 @@ angular.module('market-front').controller('cartController', function ($scope, $h
     $scope.createOrder = function () {
         console.log($localStorage.webMarketUser)
         if ($localStorage.webMarketUser != null) {
-            window.location = "#!/order";
-            // window.open("#!/order")//обе операции выполняют одинаковую функцию
+            window.location = "#!/orderDetails";
+            // window.open("#!/orderDetails")//обе операции выполняют одинаковую функцию
         } else {
             alert("You need to log in!")
         }

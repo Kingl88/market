@@ -39,6 +39,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#!/cart">Cart</a>
                     </li>
+                    <li class="nav-item" ng-show="isUserLoggedIn()">
+                        <a class="nav-link" href="#!/orders">My orders</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#!/statistic">Statistics</a>
                     </li>
@@ -60,12 +63,6 @@
                     </li>
                     <li class="nav-item" ng-show="!isUserLoggedIn()" style="padding: 4px;">
                         <a class="btn btn-outline-secondary btn-sm" href="#!/createUser">SignUp</a>
-                    </li>
-                    <li class="nav-item" ng-show="!isUserLoggedIn()" style="padding: 4px;">
-                        <a class="btn btn-outline-secondary btn-sm" href="#!/auth">SignInWithCloak</a>
-<!--                        <button class="btn btn-outline-secondary btn-sm" ng-click="authWithKeycloak()"-->
-<!--                                style="margin-left: 10px;">SignInWithCloak-->
-<!--                        </button>-->
                     </li>
                     <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
                         <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">SignOut</button>
@@ -89,9 +86,13 @@
     <script src="createProduct/createProduct.js"></script>
     <script src="createUser/createUser.js"></script>
     <script src="cart/cart.js"></script>
+    <script src="orders/orders.js"></script>
     <script src="statistic/statistic.js"></script>
-    <script src="order/order.js"></script>
-    <script src="auth/auth.js"></script>
+    <script src="order_pay/order_pay.js"></script>
+    <script src="orderDetails/orderDetails.js"></script>
+    <script
+            src="https://www.paypal.com/sdk/js?client-id=AZfzc_XaFYxOu9MXE2TWMHR6dRmnRhZNOqZb2T6YC2DNAnM7A8uijIE36ehqd_60Z7DUDIW3Lsa2Tn5u&currency=RUB">
+    </script>
 </div>
 </body>
 </html>

@@ -11,6 +11,7 @@ import ru.gb.market.order.integrations.CartServiceIntegration;
 import ru.gb.market.order.repositories.OrderRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class OrderService {
         Order order = new Order();
         order.setAddress(detailsDto.getAddress());
         order.setPhone(detailsDto.getPhone());
+        order.setStatusCode("Не оплачен");
         order.setUsername(username);
         order.setTotalPrice(currentCart.getTotalPrice());
         List<OrderItem> itemList = currentCart.getItems().stream().map(o->
@@ -43,5 +45,11 @@ public class OrderService {
 
     public List<Order> findAllByUsername(String username){
         return orderRepository.findAllByUsername(username);
+    }
+    public Optional<Order> findById(Long id) {
+        return orderRepository.findById(id);
+    }
+    public void save(Order order){
+        orderRepository.save(order);
     }
 }
