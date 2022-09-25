@@ -1,6 +1,6 @@
---liquibase formatted sql
-
---changeset Siarhei:Create_tables
+-- -- liquibase formatted sql
+--
+-- changeset Siarhei:Create_tables
 
 create table orders
 (
@@ -9,6 +9,7 @@ create table orders
     total_price int          not null,
     address     varchar(255),
     phone       varchar(255),
+    status      varchar(255),
     created_at  timestamp default current_timestamp,
     updated_at  timestamp default current_timestamp
 );
