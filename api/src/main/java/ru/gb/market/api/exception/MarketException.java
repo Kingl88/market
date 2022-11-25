@@ -1,25 +1,37 @@
 package ru.gb.market.api.exception;
 
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class MarketException {//класс для описания ошибки
-    private List<String> messages;
+    private String messages;
+    private String code;
     private Date date;
 
-    public MarketException(List<String> messages) {
+    public MarketException(String messages, String code) {
         this.messages = messages;
+        this.code = code;
         this.date = new Date();
     }
 
-    public MarketException(String message) {
-        this(List.of(message));
+    public MarketException(String messages) {
+        this.messages = messages;
     }
 
-    public MarketException(String... messages) {
-        this(Arrays.asList(messages));
+    public String getMessages() {
+        return messages;
+    }
+
+    public void setMessages(String messages) {
+        this.messages = messages;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public MarketException() {
