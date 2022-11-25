@@ -44,9 +44,9 @@ angular.module('market-front').controller('statisticController', function ($scop
     $scope.getFileProducts = function () {
         stompClient.send('/app/giveMeFileAboutProducts');
     }
-    $scope.getFileOrders = function () {
-        stompClient.send('/app/giveMeFileAboutOrders');
-    }
+    // $scope.getFileOrders = function () {
+    //     stompClient.send('/app/giveMeFileAboutOrders');
+    // }
     if ($localStorage.isCreatedReport == null || $localStorage.isCreatedReport === false) {
         connect();
     }

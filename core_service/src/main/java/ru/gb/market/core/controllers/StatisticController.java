@@ -33,11 +33,11 @@ public class StatisticController {
         Thread.sleep(10000);
        return String.valueOf(statisticService.createFileProducts());//отправляем клиенту "true/false" (создался файл или нет)
     }
-    @MessageMapping("/giveMeFileAboutOrders")//после того как пришел запрос с веб сокета по пути "app/giveMeFile"
-    @SendTo("/topic/getFileAboutOrders")
-    public String fromClientOrders() throws InterruptedException {
-        return "Hello";//отправляем клиенту "true/false" (создался файл или нет)
-    }
+//    @MessageMapping("/giveMeFileAboutOrders")//после того как пришел запрос с веб сокета по пути "app/giveMeFile"
+//    @SendTo("/topic/getFileAboutOrders")
+//    public String fromClientOrders() throws InterruptedException {
+//        return "Hello";//отправляем клиенту "true/false" (создался файл или нет)
+//    }
 
     @GetMapping("/")//EndPoint для получения информации о времени работы методов всех контроллеров
     public List<ControllerStatisticDTO> getAll() {
