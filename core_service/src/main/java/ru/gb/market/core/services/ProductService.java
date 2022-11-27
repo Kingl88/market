@@ -1,17 +1,13 @@
 package ru.gb.market.core.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gb.market.api.dto.PageDto;
 import ru.gb.market.api.exception.ResourceNotFoundException;
 import ru.gb.market.api.core.ProductDto;
-import ru.gb.market.core.mapper.product.ProductMapper;
-import ru.gb.market.core.models.Category;
-import ru.gb.market.core.models.Product;
+import ru.gb.market.core.entities.Category;
+import ru.gb.market.core.entities.Product;
 import ru.gb.market.core.repositories.ProductRepository;
 
 

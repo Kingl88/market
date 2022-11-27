@@ -2,6 +2,8 @@ package ru.gb.market.api.cart;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.math.BigDecimal;
+
 @Schema(description = "Модель продукта в корзине")
 public class CartItemDto {
     @Schema(description = "Id продукта", required = true)
@@ -11,11 +13,11 @@ public class CartItemDto {
     @Schema(description = "Количество", required = true)
     private int count;
     @Schema(description = "Стоимость за единицу", required = true)
-    private int pricePerProduct;
+    private BigDecimal pricePerProduct;
     @Schema(description = "Общая стоимость", required = true)
-    private int price;
+    private BigDecimal price;
 
-    public CartItemDto(Long productId, String productTitle, int count, int pricePerProduct, int price) {
+    public CartItemDto(Long productId, String productTitle, int count, BigDecimal pricePerProduct, BigDecimal price) {
         this.productId = productId;
         this.productTitle = productTitle;
         this.count = count;
@@ -50,19 +52,19 @@ public class CartItemDto {
         this.count = count;
     }
 
-    public int getPricePerProduct() {
+    public BigDecimal getPricePerProduct() {
         return pricePerProduct;
     }
 
-    public void setPricePerProduct(int pricePerProduct) {
+    public void setPricePerProduct(BigDecimal pricePerProduct) {
         this.pricePerProduct = pricePerProduct;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

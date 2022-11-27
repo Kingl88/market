@@ -14,7 +14,7 @@ create table products
 (
     id          bigserial primary key,
     title       varchar(255),
-    price       int,
+    price       numeric(8,2),
     count       int,
     category_id bigint references categories (id),
     created_at  timestamp default current_timestamp,

@@ -3,7 +3,7 @@ package ru.gb.market.core.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.market.core.repositories.CategoryRepository;
-import ru.gb.market.core.models.Category;
+import ru.gb.market.core.entities.Category;
 
 import java.util.List;
 import java.util.Optional;

@@ -2,8 +2,8 @@ package ru.gb.market.core.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.gb.market.core.models.Category;
-import ru.gb.market.core.models.Product;
+import ru.gb.market.core.entities.Category;
+import ru.gb.market.core.entities.Product;
 
 import java.util.List;
 
