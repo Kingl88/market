@@ -1,4 +1,4 @@
-package ru.gb.market.core.models;
+package ru.gb.market.core.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

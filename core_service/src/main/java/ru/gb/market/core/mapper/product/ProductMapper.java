@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.gb.market.api.core.ProductDto;
-import ru.gb.market.core.models.Product;
+import ru.gb.market.core.entities.Product;
 import ru.gb.market.core.services.CategoryService;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)

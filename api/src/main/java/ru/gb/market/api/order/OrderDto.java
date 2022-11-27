@@ -1,11 +1,12 @@
 package ru.gb.market.api.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OrderDto {
     private Long id;
     private String username;
-    private Integer totalPrice;
+    private BigDecimal totalPrice;
     private List<OrderItemDto> items;
     private String address;
     private String phone;
@@ -14,7 +15,7 @@ public class OrderDto {
     public OrderDto() {
     }
 
-    public OrderDto(Long id, String username, Integer totalPrice, List<OrderItemDto> items, String address, String phone, String statusCode) {
+    public OrderDto(Long id, String username, BigDecimal totalPrice, List<OrderItemDto> items, String address, String phone, String statusCode) {
         this.id = id;
         this.username = username;
         this.totalPrice = totalPrice;
@@ -64,11 +65,11 @@ public class OrderDto {
         this.items = items;
     }
 
-    public Integer getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

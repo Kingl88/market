@@ -10,7 +10,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.stereotype.Component;
-import ru.gb.market.core.models.Product;
+import ru.gb.market.core.entities.Product;
 
 import java.io.*;
 import java.util.List;
@@ -89,7 +89,7 @@ public class ExcelUtilProducts {
             cell.setCellValue(product.getTitle());
             // Price
             cell = row.createCell(2, CellType.NUMERIC);
-            cell.setCellValue(product.getPrice());
+            cell.setCellValue(product.getPrice().doubleValue());
             // Count
             cell = row.createCell(3, CellType.NUMERIC);
             cell.setCellValue(product.getCount());

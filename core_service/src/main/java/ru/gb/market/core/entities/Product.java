@@ -1,4 +1,4 @@
-package ru.gb.market.core.models;
+package ru.gb.market.core.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class Product {
     @Column(name = "title")
     private String title;
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
     @Column(name = "count")
     private int count;
     @ManyToOne
@@ -41,7 +42,7 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return price == product.price && Objects.equals(id, product.id) && Objects.equals(title, product.title);
+        return price.equals(product.price) && Objects.equals(id, product.id) && Objects.equals(title, product.title);
     }
 
     @Override

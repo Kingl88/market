@@ -94,9 +94,9 @@ public class ExcelUtilOrders {
             cell = row.createCell(2, CellType.NUMERIC);
             cell.setCellValue(itemDto.getCount());
             cell = row.createCell(3, CellType.NUMERIC);
-            cell.setCellValue(itemDto.getPricePerProduct());
+            cell.setCellValue(itemDto.getPricePerProduct().doubleValue());
             cell = row.createCell(4, CellType.NUMERIC);
-            cell.setCellValue(itemDto.getPrice());
+            cell.setCellValue(itemDto.getPrice().doubleValue());
         }
     }
 

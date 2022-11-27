@@ -1,7 +1,6 @@
 package ru.gb.market.core.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -10,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.gb.market.api.dto.PageDto;
 import ru.gb.market.api.exception.ResourceNotFoundException;
 import ru.gb.market.api.exception.DataValidationException;
-import ru.gb.market.core.models.Category;
-import ru.gb.market.core.models.Product;
-import ru.gb.market.core.services.CategoryService;
+import ru.gb.market.core.entities.Product;
 import ru.gb.market.core.services.ProductService;
 import ru.gb.market.api.core.ProductDto;
 import ru.gb.market.core.mapper.product.ProductMapper;

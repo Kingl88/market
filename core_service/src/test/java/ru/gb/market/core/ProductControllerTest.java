@@ -10,6 +10,8 @@ import org.springframework.test.context.jdbc.Sql;
 import ru.gb.market.api.core.ProductDto;
 import ru.gb.market.api.dto.PageDto;
 
+import java.math.BigDecimal;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProductControllerTest extends FunctionalTest {
 
@@ -51,7 +53,7 @@ public class ProductControllerTest extends FunctionalTest {
         ProductDto productDto = new ProductDto();
         productDto.setCategoryTitle("Fruit");
         productDto.setTitle("Apple");
-        productDto.setPrice(100);
+        productDto.setPrice(new BigDecimal(100));
         createRequest()
                 .url("/api/v1/products/createProduct")
                 .post(ProductDto.class, productDto);
@@ -60,7 +62,7 @@ public class ProductControllerTest extends FunctionalTest {
                 .get(new ParameterizedTypeReference<>() {
                 });
         Assertions.assertEquals(pageDto.getTotalElements(), 22);
-        Assertions.assertEquals(pageDto.getContent().get(1).getPrice(), 100);
+        Assertions.assertEquals(pageDto.getContent().get(1).getPrice(), BigDecimal.valueOf(100));
     }
 
     @Test
@@ -84,7 +86,7 @@ public class ProductControllerTest extends FunctionalTest {
                 .get(ProductDto.class);
         productDto.setCategoryTitle("Fruit");
         productDto.setTitle("Apple");
-        productDto.setPrice(100);
+        productDto.setPrice(new BigDecimal(100));
         createRequest()
                 .url("/api/v1/products/")
                 .put(productDto);
@@ -92,6 +94,6 @@ public class ProductControllerTest extends FunctionalTest {
                 .url("/api/v1/products/1")
                 .get(ProductDto.class);
         Assertions.assertEquals(productDtoAfterTest, productDto);
-        Assertions.assertEquals(productDtoAfterTest.getPrice(), 100);
+        Assertions.assertEquals(productDtoAfterTest.getPrice(), BigDecimal.valueOf(100));
     }
 }
