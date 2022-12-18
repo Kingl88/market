@@ -35,9 +35,9 @@ public class CartController {
     )
     @GetMapping("/{uuid}")//получение корзины из Redis
     public CartDto getCart(@RequestHeader(required = false)
-                           @Parameter(description = "Уникальный набор символов для неавторизованного пользователя") String username,
+                           @Parameter(description = "Имя пользователя из header") String username,
                            @PathVariable
-                           @Parameter(description = "Имя пользователя из header") String uuid) {//@RequestHeader(required = false) - достаем "username" из header
+                           @Parameter(description = "Уникальный набор символов для неавторизованного пользователя") String uuid) {//@RequestHeader(required = false) - достаем "username" из header
         return mapper.mapToDto(cartService.getCurrentCart(getCurrentCartUuid(username, uuid)));
     }
 
